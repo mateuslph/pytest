@@ -1,3 +1,5 @@
+import pytest
+
 from codigo.bytebank import Funcionario
 
 class TestClass:
@@ -30,3 +32,23 @@ class TestClass:
         resultado = funcionario_teste.salario
 
         assert resultado == esperado # Then
+
+    def test_quando_calcular_bonus_recebe_1000_deve_retornar_100(self):
+        entrada_salario = 1000  # Given
+        entrada_nome = 'Paulo Bragança'
+        esperado = 100
+
+        funcionario_teste = Funcionario(entrada_nome, '10/10/2000', entrada_salario)
+        resultado = funcionario_teste.calcular_bonus()  # When
+
+        assert resultado == esperado  # Then
+
+    def test_quando_calcular_bunus_recebe_10000000_deve_retornar_exception(self):
+        with pytest.raises(Exception):
+            entrada = 10000000  # Given
+            entrada_nome = 'Paulo Bragança'
+
+            funcionario_teste = Funcionario(entrada_nome, '10/10/2000', entrada)
+            resultado = funcionario_teste.calcular_bonus()  # When
+
+            assert resultado  # Then
